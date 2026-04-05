@@ -1,16 +1,15 @@
 /*
     REFERENCE:
-    - Upstash Redis XRANGE. Available at: https://upstash.com/docs/redis/sdks/ts/commands/stream/xrange
+    - Upstash Redis XREAD. Available at: https://upstash.com/docs/redis/sdks/ts/commands/stream/xread
 */
 
 import { redis } from "../config/redis.config.js";
-import { Redis } from '@upstash/redis';
 
 export class AnalyticsRedisRepository {
 
-    constructor(redis){
-        this.redis = redis;
-    }
+    // constructor(redis){
+    //     this.redis = redis;
+    // }
 
     async addToStream(streamName, data, limit = 1000) {
       
@@ -39,17 +38,8 @@ export class AnalyticsRedisRepository {
 
 
     async readStream(streamKey, lastId = "0-0", count = 10) {
-        const UPSTASH_REDIS_REST_URL="https://accurate-unicorn-91780.upstash.io"
-        const UPSTASH_REDIS_REST_TOKEN="gQAAAAAAAWaEAAIncDFiYTg1NzIxN2U0ZWM0ZWNhODNhODBjY2IwZDMxNDkxNHAxOTE3ODA"
-
-        const redis = new Redis({
-            url: UPSTASH_REDIS_REST_URL,
-            token: UPSTASH_REDIS_REST_TOKEN
-        });
-
         const keys = await redis.keys("ticks:*");
         console.log("All tick streams:", keys);
-
     try {
       console.log("streaKey: " + streamKey);
       const redisData = await redis.xread(streamKey, lastId, { count });
