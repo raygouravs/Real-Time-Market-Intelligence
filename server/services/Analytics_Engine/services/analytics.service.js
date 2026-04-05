@@ -46,7 +46,7 @@ export class AnalyticsService {
 
     if (stock_prices.length === 0) return;
 
-    const indexVal = price_sum/stock_prices.length
+    const indexVal = Number((price_sum/stock_prices.length).toFixed(2));
     console.log("price_sum => " + price_sum);
     console.log("stock prices length => " + stock_prices.length);
     console.log("computed market index => " + indexVal);
