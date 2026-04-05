@@ -20,7 +20,8 @@ export class AnalyticsService {
         prices: [],
         prevClose: null,
         lastPrice: null,
-        trend: ""
+        trend: "",
+        timestamp: Date.now()
       };
     }
   }
@@ -68,6 +69,7 @@ export class AnalyticsService {
     }
 
     stock.lastPrice = Number(tick.price);
+    stock.timestamp = Date.now();
 
     if(stock.prices.length > 1){
       const arrlen = stock.prices.length;
