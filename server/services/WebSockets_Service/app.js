@@ -3,7 +3,7 @@ import { WSRedisRepository } from './repository/ws.repository.js';
 import { WSService } from './service/ws.service.js';
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 // Dependency Injection Setup
 const redisRepo = new WSRedisRepository();
